@@ -7,9 +7,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      robots,
+      robots: [],
       searchField: "",
     };
+  }
+
+  async componentDidMount() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const users = await response.json();
+    this.setState({ robots: users });
   }
 
   onSearchText = (e) => {
@@ -23,6 +29,10 @@ class App extends Component {
         .toLowerCase()
         .includes(this.state.searchField.toLowerCase());
     });
+
+    if (this.state.robots === 0) {
+      return <h1>Loading...</h1>;
+    }
 
     return (
       <div className="tc">
