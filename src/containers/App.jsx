@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { robots } from "./robot";
-import CardList from "./components/CardList";
-import SearchBox from "./components/SearchBox";
-import Scroll from "./components/Scroll";
+import { robots } from "../robot";
+import CardList from "../components/CardList";
+import SearchBox from "../components/SearchBox";
+import Scroll from "../components/Scroll";
 
 class App extends Component {
   constructor() {
@@ -31,11 +31,9 @@ class App extends Component {
         .includes(this.state.searchField.toLowerCase());
     });
 
-    if (this.state.robots === 0) {
-      return <h1>Loading...</h1>;
-    }
-
-    return (
+    return !this.state.robots ? (
+      <h1>Loading...</h1>
+    ) : (
       <div className="tc">
         <h1 className="f2">Robot NFT</h1>
         <SearchBox searchText={this.onSearchText} />
